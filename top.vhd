@@ -71,10 +71,10 @@ entity AX309 is
 		
 		-- note: typo in ucf for following, missing several io pins
 		--//////////// 2x20 GPIO Header(2x3 reserved for power) //////////
-		GPIO_0_D : inout std_logic_vector(31 downto 0) := (others => 'Z');
+		GPIO_0_D : inout std_logic_vector(33 downto 0) := (others => 'Z');
 
 		--//////////// 2x20 GPIO Header (2x3 reserved for power) //////////
-		GPIO_1_D : inout std_logic_vector(32 downto 0) := (others => 'Z')
+		GPIO_1_D : inout std_logic_vector(33 downto 0) := (others => 'Z')
                              
 	);
 end entity AX309;
@@ -96,7 +96,7 @@ architecture rtl of AX309 is
 	signal JTAG_TCK 	: std_logic;
 	signal JTAG_TMS 	: std_logic;
 	signal JTAG_TDO 	: std_logic;
-	signal JTAG_TDI 		: std_logic;
+	signal JTAG_TDI 	: std_logic;
   
    signal io_sdram_DQ_write : std_logic_vector(15 downto 0);
    signal io_sdram_DQ_writeEnable : std_logic;
@@ -162,16 +162,21 @@ begin
 		);
   SDRAM_CLK <= clk_sdram;
 
-	BSCAN_SPARTAN6_inst : BSCAN_SPARTAN6
-	generic map (
-		JTAG_CHAIN => 1 -- chain number
-	) 
-	port map (
-		TCK => JTAG_TCK,
-		TMS => JTAG_TMS,
-		TDO => JTAG_TDI,
-		TDI => JTAG_TDO
-	);
+	-- can we use the bscan interface? Unable to get it to work right now so let's instead map to the last 4 GPIOs
+	--BSCAN_SPARTAN6_inst : BSCAN_SPARTAN6
+	--generic map (
+	--	JTAG_CHAIN => 1 -- chain number
+	--) 
+	--port map (
+	--	TCK => JTAG_TCK,
+	--	TMS => JTAG_TMS,
+	--	TDO => JTAG_TDO,
+	--	TDI => JTAG_TDI
+	--);
+	JTAG_TCK <= GPIO_1_D(33);
+	JTAG_TMS <= GPIO_1_D(32);
+	JTAG_TDO <= GPIO_1_D(31);
+	JTAG_TDI <= GPIO_1_D(30);
 	
   LED(3 downto 0) <=   gpioA_write(3 downto 0);   -- mirror GPIOA(3:0) onto LEDs
   --gpioA_read(3 downto 0) <= SW(3 downto 0);

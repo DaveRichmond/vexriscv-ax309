@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 14.7
-# Date: Tue Dec 18 06:21:09 2018
+# Date: Wed Dec 19 00:57:36 2018
 #
 ##############################################################
 #
@@ -28,7 +28,7 @@ SET flowvendor = Other
 SET formalverification = false
 SET foundationsym = false
 SET implementationfiletype = Ngc
-SET package = csg225
+SET package = ftg256
 SET removerpms = false
 SET simulationfiles = Behavioral
 SET speedgrade = -3
@@ -266,4 +266,4 @@ CSET use_status=false
 MISC pkg_timestamp=2012-05-10T12:44:55Z
 # END Extra information
 GENERATE
-# CRC: bb274e01
+# CRC: 61a69792
