@@ -1,8 +1,8 @@
 NET "CLK_50M" LOC = T8 | TNM_NET = sys_clk_pin;
 TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 50000 kHz;
 
-PIN "pll_inst/clkout2_buf.O" CLOCK_DEDICATED_ROUTE = FALSE;
-NET "GPIO_1_D<33>" CLOCK_DEDICATED_ROUTE = FALSE;
+PIN "pll_inst/clkout2_buf.O" CLOCK_DEDICATED_ROUTE = FALSE; # sdram clock output
+NET "GPIO_0_D<33>" CLOCK_DEDICATED_ROUTE = FALSE; 				# jtag tck output
 
 ##
 #NET RSTn                  LOC = L3 | IOSTANDARD = "LVCMOS33"; ## reset pushbutton
