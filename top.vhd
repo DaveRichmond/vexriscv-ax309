@@ -93,10 +93,10 @@ architecture rtl of AX309 is
 	signal gpioB_writeEnable  : std_logic_vector(31 downto 0);
 
 	--//////// JTAG ////////
-	signal JTAG_TCK 	: std_logic;
-	signal JTAG_TMS 	: std_logic;
-	signal JTAG_TDO 	: std_logic;
-	signal JTAG_TDI 	: std_logic;
+	--	signal JTAG_TCK 	: std_logic;
+	--	signal JTAG_TMS 	: std_logic;
+	--	signal JTAG_TDO 	: std_logic;
+	--	signal JTAG_TDI 	: std_logic;
   
    signal io_sdram_DQ_write : std_logic_vector(15 downto 0);
    signal io_sdram_DQ_writeEnable : std_logic;
@@ -173,11 +173,7 @@ begin
 	--	TDO => JTAG_TDO,
 	--	TDI => JTAG_TDI
 	--);
-	JTAG_TCK <= GPIO_1_D(33);
-	JTAG_TMS <= GPIO_1_D(32);
-	JTAG_TDO <= GPIO_1_D(31);
-	JTAG_TDI <= GPIO_1_D(30);
-	
+
   LED(3 downto 0) <=   gpioA_write(3 downto 0);   -- mirror GPIOA(3:0) onto LEDs
   --gpioA_read(3 downto 0) <= SW(3 downto 0);
   --gpioA_read(31 downto 0) <= GPIO_0_D(31 downto 0);
@@ -190,10 +186,10 @@ begin
       io_asyncReset =>  not KEY(0),
       io_axiClk   =>  clk_core,
       io_vgaClk   =>  clk_25M,
-      io_jtag_tck =>  JTAG_TCK,
-      io_jtag_tms =>  JTAG_TMS,
-      io_jtag_tdi =>  JTAG_TDI,
-      io_jtag_tdo =>  JTAG_TDO,
+      io_jtag_tck =>  GPIO_0_D(33),
+      io_jtag_tms =>  GPIO_0_D(32),
+      io_jtag_tdi =>  GPIO_0_D(30),
+      io_jtag_tdo =>  GPIO_0_D(31),
 		-- work out how to connect jtag later
 		--io_jtag_tck => '1',
 		--io_jtag_tms => '1',
